@@ -163,97 +163,55 @@
     </div>
     <script>
         document.getElementById('calculateBtn').addEventListener('click', function () {
-        // Get values from the form
-        const customerName = document.getElementById('customerName').value;
-        const paperWidth = parseFloat(document.getElementById('paperWidth').value);
-        const paperHeight = parseFloat(document.getElementById('paperHeight').value);
-        const gram = parseFloat(document.getElementById('gram').value);
-        const gramRate = parseFloat(document.getElementById('gramRate').value);
-        const sheet = parseFloat(document.getElementById('sheet').value);
-        const labour = parseFloat(document.getElementById('paperLabour').value);
-        const boxboardWidth = parseFloat(document.getElementById('boxboardWidth').value);
-        const boxboardHeight = parseFloat(document.getElementById('boxboardHeight').value);
-        const boxboardGram = parseFloat(document.getElementById('boxboardGram').value);
-        const boxboardRate = parseFloat(document.getElementById('boxboardRate').value);
-        const boxboardLabour = parseFloat(document.getElementById('boxboardLabour').value);
-        const rollingCost = parseFloat(document.getElementById('rollingCost').value);
-        const additionalLabourCost = parseFloat(document.getElementById('labourCost').value);
-        const printingCost = parseFloat(document.getElementById('printingCost').value);
-        const laminationCost = parseFloat(document.getElementById('laminationCost').value);
+            // Get values from the form
+            const customerName = document.getElementById('customerName').value;
+            const paperWidth = parseFloat(document.getElementById('paperWidth').value);
+            const paperHeight = parseFloat(document.getElementById('paperHeight').value);
+            const gram = parseFloat(document.getElementById('gram').value);
+            const gramRate = parseFloat(document.getElementById('gramRate').value);
+            const sheet = parseFloat(document.getElementById('sheet').value);
+            const labour = parseFloat(document.getElementById('paperLabour').value);
+            const boxboardWidth = parseFloat(document.getElementById('boxboardWidth').value);
+            const boxboardHeight = parseFloat(document.getElementById('boxboardHeight').value);
+            const boxboardGram = parseFloat(document.getElementById('boxboardGram').value);
+            const boxboardRate = parseFloat(document.getElementById('boxboardRate').value);
+            const boxboardLabour = parseFloat(document.getElementById('boxboardLabour').value);
+            const rollingCost = parseFloat(document.getElementById('rollingCost').value);
+            const additionalLabourCost = parseFloat(document.getElementById('labourCost').value);
+            const printingCost = parseFloat(document.getElementById('printingCost').value);
+            const laminationCost = parseFloat(document.getElementById('laminationCost').value);
     
-        // Calculate Paper Size
-        const paperSize = paperWidth * paperHeight;
+            // Calculate Paper Size
+            const paperSize = paperWidth * paperHeight;
     
-        // Calculate Rim Rate
-        const rimRate = ((gram * paperSize) / 3100) * gramRate + labour;
-        document.getElementById('rimRate').value = rimRate.toFixed(2);
+            // Calculate Rim Rate
+            const rimRate = ((gram * paperSize) / 3100) * gramRate + labour;
+            document.getElementById('rimRate').value = rimRate.toFixed(2);
     
-        // Calculate Total Cost of Paper
-        const totalPaperCost = rimRate * sheet;
-        document.getElementById('totalPaperCost').value = totalPaperCost.toFixed(2);
+            // Calculate Total Cost of Paper
+            const totalPaperCost = rimRate * sheet;
+            document.getElementById('totalPaperCost').value = totalPaperCost.toFixed(2);
     
-        // Calculate Box Board Size
-        const boxboardSize = boxboardWidth * boxboardHeight;
+            // Calculate Box Board Size
+            const boxboardSize = boxboardWidth * boxboardHeight;
     
-        // Calculate Box Board Cost
-        const totalBoxBoardCost = boxboardSize * boxboardGram * boxboardRate / 15500 * 2.5 + boxboardLabour;
-        document.getElementById('totalBoxBoardCost').value = totalBoxBoardCost.toFixed(2);
+            // Calculate Box Board Cost
+            const totalBoxBoardCost = boxboardSize * boxboardGram * boxboardRate / 15500 * 2.5 + boxboardLabour;
+            document.getElementById('totalBoxBoardCost').value = totalBoxBoardCost.toFixed(2);
     
-        // Calculate Total Cost
-        const totalCost = totalPaperCost + totalBoxBoardCost + rollingCost + additionalLabourCost + printingCost + laminationCost;
-        document.getElementById('totalCost').value = totalCost.toFixed(2);
+            // Calculate Total Cost
+            const totalCost = totalPaperCost + totalBoxBoardCost + rollingCost + additionalLabourCost + printingCost + laminationCost;
+            document.getElementById('totalCost').value = totalCost.toFixed(2);
     
-        // Calculate Total Cost for 12 Pieces
-        const totalCost12 = totalCost / 7 / 12;
-        document.getElementById('totalCost12').value = totalCost12.toFixed(2);
+            // Calculate Total Cost for 12 Pieces
+            const totalCost12 = totalCost / 7 / 12;
+            document.getElementById('totalCost12').value = totalCost12.toFixed(2);
     
-        // Calculate Price per Copy
-        const pricePerCopy = totalCost12 / 12;
-        document.getElementById('pricePerCopy').value = pricePerCopy.toFixed(2);
-    
-        // Prepare data to be sent to the server
-        const data = {
-            customer_name: customerName,
-            paper_width: paperWidth,
-            paper_height: paperHeight,
-            gram: gram,
-            gram_rate: gramRate,
-            sheet: sheet,
-            labour_cost: labour,
-            boxboard_width: boxboardWidth,
-            boxboard_height: boxboardHeight,
-            boxboard_gram: boxboardGram,
-            boxboard_rate: boxboardRate,
-            boxboard_labour: boxboardLabour,
-            rolling_cost: rollingCost,
-            additional_labour_cost: additionalLabourCost,
-            printing_cost: printingCost,
-            lamination_cost: laminationCost,
-            total_cost: totalCost,
-            total_cost_12: totalCost12,
-            price_per_copy: pricePerCopy
-        };
-    
-        // Send data to the server
-        fetch('/save_rates/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.status === 'success') {
-                alert('Rates saved successfully!');
-            } else {
-                alert('Error saving rates.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    });
-    
+            // Calculate Price per Copy
+            const pricePerCopy = totalCost12 / 12;
+            document.getElementById('pricePerCopy').value = pricePerCopy.toFixed(2);
+        });
     </script>
+    
 </body>
 </html>
