@@ -9,6 +9,11 @@
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Copy Production Rate Calculator</h2>
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" class="form-control" id="customerName" placeholder="Enter customer name">
+        </div>
+
         <form id="production-rate-form">
             <!-- Cost of Paper Section -->
             <div class="card mb-4">
@@ -212,6 +217,5 @@
             document.getElementById('pricePerCopy').value = pricePerCopy.toFixed(2);
         });
     </script>
-    
 </body>
 </html>
